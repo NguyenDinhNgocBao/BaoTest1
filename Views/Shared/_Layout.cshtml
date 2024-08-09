@@ -30,26 +30,33 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Detail">Detail</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-success" asp-area="" asp-controller="Products" asp-action="PlusView">Plus</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="LogIn">LogIn</a>
                         </li>
-                        <button class="btn-group">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="LogOut">LogOut</a>
-                        </button>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="LopHoc" asp-action="Index">LopHoc</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2 text-white" style="background-color:aqua; min-height:1050px; padding:0">
+                <a href="/" class="list-group-item text-white" style="background-color:transparent">About</a>
+                <a href="/" class="list-group-item text-white" style="background-color:transparent">About</a>
+                <a href="/" class="list-group-item text-white" style="background-color:transparent">About</a>
+                <a href="/" class="list-group-item text-white" style="background-color:transparent">About</a>
+                <a href="/" class="list-group-item text-white" style="background-color:transparent">About</a>
+                <a href="/" class="list-group-item text-white" style="background-color:transparent">About</a>
+            </div>
+            <div class="col-10" style="min-height:610px">
+                @RenderBody()
+            </div>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">

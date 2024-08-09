@@ -1,0 +1,37 @@
+﻿@using BaoTest1.ViewModel
+@model SinhVienViewModel
+
+<h1>Danh sách Sinh Viên</h1>
+
+<div>
+    <table class="table table-bordered table-hover">
+        <tr class="table-success">
+            <th>Id</th>
+            <th>Mã Sinh Viên</th>
+            <th>Họ</th>
+            <th>Tên</th>
+            <th>Ngày sinh</th>
+            <th>Giới tính</th>
+        </tr>
+        @if (Model.LisSV != null && Model.LisSV.Any())
+        {
+            foreach (var sv in Model.LisSV)
+            {
+                <tr>
+                    <td>@sv.Id</td>
+                    <td>@sv.MaSinhVien</td>
+                    <td>@sv.HoSinhVien</td>
+                    <td>@sv.TenSinhVien</td>
+                    <td>@sv.NgaySinh</td>
+                    <td>@sv.GioiTinh</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">Không có sinh viên nào.</td>
+            </tr>
+        }
+    </table>
+</div>

@@ -1,4 +1,5 @@
 ﻿using BaoTest1.Models;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
 
 namespace BaoTest1.Services
 {
@@ -74,7 +75,55 @@ namespace BaoTest1.Services
         /// </summary>
         public List<Products> GetProducts(string? keyword)
         {
-            return products;
+            var product = products;
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                product = product
+                .Where(e =>
+                    e.Name.ToLower().Contains(keyword.ToLower()) ||
+                    e.Price.ToString() == keyword).ToList();
+            }
+            return product;
+        }
+
+
+        public Products GetById(int id)
+        {
+            var product = products.Where(p => p.Id == id).FirstOrDefault();
+            return product;
+        }
+        public bool Delete(int id)
+        {
+            var product = products.Where(p => p.Id == id).FirstOrDefault();
+            if(product != null)
+            {
+                products.Remove(product);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool Update(Products product)
+        {
+            var p = products.Where(e => e.Id == product.Id).FirstOrDefault();
+            if(p != null)
+            {
+                p.Name = product.Name;
+                p.Price = product.Price;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void AddProduct(Products product)
+        {
+            products.Add(product);
         }
     }
 }
