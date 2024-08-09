@@ -6,6 +6,7 @@ namespace BaoTest1.ViewModel
     {
         public List<SinhVien> LisSV { get; set; }
 
-        
+        public SinhVien SinhVienRespone { get; set; }
+
     }
 }

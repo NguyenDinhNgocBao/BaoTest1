@@ -1,0 +1,60 @@
+﻿@using BaoTest1.ViewModel
+@model SinhVienViewModel
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
+<h1>Edit Sinh Viên</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Update" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SinhVienRespone.MaSinhVien" class="control-label"></label>
+                <input asp-for="SinhVienRespone.MaSinhVien" class="form-control" value="@Model.SinhVienRespone.MaSinhVien" />
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SinhVienRespone.HoSinhVien" class="control-label"></label>
+                <input asp-for="SinhVienRespone.HoSinhVien" class="form-control" value="@Model.SinhVienRespone.HoSinhVien" />
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SinhVienRespone.TenSinhVien" class="control-label"></label>
+                <input asp-for="SinhVienRespone.TenSinhVien" class="form-control" value="@Model.SinhVienRespone.TenSinhVien" />
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SinhVienRespone.NgaySinh" class="control-label"></label>
+                <input asp-for="SinhVienRespone.NgaySinh" class="form-control" value="@Model.SinhVienRespone.NgaySinh" />
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SinhVienRespone.GioiTinh" class="control-label"></label>
+                <input asp-for="SinhVienRespone.GioiTinh" class="form-control" value="@Model.SinhVienRespone.GioiTinh" />
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SinhVienRespone.MaLopHoc" class="control-label"></label>
+                <input asp-for="SinhVienRespone.MaLopHoc" class="form-control" value="@Model.SinhVienRespone.MaLopHoc" />
+            </div>
+            <div>
+                <input type="hidden" asp-for="SinhVienRespone.Id" value="@Model.SinhVienRespone.Id" />
+                <a asp-action="Index" class="btn btn-secondary">Back</a>
+                <button type="submit" class="btn btn-success">Agree</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

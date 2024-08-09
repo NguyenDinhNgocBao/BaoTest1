@@ -35,22 +35,16 @@ namespace BaoTest1.Controllers
             return View();
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Create(LopHoc lopHoc)
         {
-            if (ModelState.IsValid)
+            var lh = lopHocService.Insert(lopHoc);
+            if (!lh)
             {
-                var result = lopHocService.Insert(lopHoc);
-                if (result)
-                {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Failed to create new LopHoc.");
-                }
+                ViewBag.Message = "Đã tồn tại lớp học này !";
+                return View(lopHoc);
             }
-            return View(lopHoc);
+            TempData["Message"] = "Thêm lớp học thành công !";
+            return RedirectToAction("Index");
         }
 
         //Delete

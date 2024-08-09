@@ -22,7 +22,8 @@ namespace BaoTest1.Services
                               .ToList();
             return ds;
         }
-        //lấy sv theo mã id
+        //lấy sv theo mã id, mã Sv, tên SV
+
         public SinhVien Get(int id)
         {
             var ds = _context.sinhViens.Where(e => e.Id == id).FirstOrDefault();
@@ -34,29 +35,61 @@ namespace BaoTest1.Services
             var ds = _context.sinhViens.Where(e => e.MaSinhVien == maSV).FirstOrDefault();
             return ds;
         }
+        // Tìm kiếm sinh viên theo nhiều tiêu chí
+        public List<SinhVien> Search(int maLop, string maSV = null, string tenSV = null)
+        {
+            var query = _context.sinhViens.Where(e => e.MaLopHoc == maLop);
+
+            if (!string.IsNullOrEmpty(maSV))
+            {
+                query = query.Where(e => e.MaSinhVien.Contains(maSV));
+            }
+
+            if (!string.IsNullOrEmpty(tenSV))
+            {
+                query = query.Where(e => e.TenSinhVien.Contains(tenSV));
+            }
+
+            return query.ToList();
+        }
         public bool Insert(SinhVien sinhVien)
         {
-            var sv = _context.sinhViens.Where(e => e.MaSinhVien == sinhVien.MaSinhVien).FirstOrDefault();
-            if(sv == null)
-            {
-                return false;
-            }
-            sv = new SinhVien
-            {
-                MaSinhVien = sinhVien.MaSinhVien,
-                HoSinhVien = sinhVien.HoSinhVien,
-                TenSinhVien = sinhVien.TenSinhVien,
-                MaLopHoc = sinhVien.MaLopHoc,
-                NgaySinh = sinhVien.NgaySinh,
-                GioiTinh = sinhVien.GioiTinh
-            };
-            _context.sinhViens.Add(sv);
-            _context.SaveChanges();
-            return true;
-
-            /*Cach 2
+            /*
             try
             {
+                // Kiểm tra xem sinh viên đã tồn tại chưa
+                var sv = _context.sinhViens.Where(e => e.MaSinhVien == sinhVien.MaSinhVien).FirstOrDefault();
+                if (sv != null)
+                {
+                    return false;
+                }
+                sv = new SinhVien
+                {
+                    MaSinhVien = sinhVien.MaSinhVien,
+                    HoSinhVien = sinhVien.HoSinhVien,
+                    TenSinhVien = sinhVien.TenSinhVien,
+                    MaLopHoc = sinhVien.MaLopHoc,
+                    NgaySinh = sinhVien.NgaySinh,
+                    GioiTinh = sinhVien.GioiTinh
+                };
+                _context.sinhViens.Add(sv);
+                _context.SaveChanges();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                // Xử lý lỗi
+                Console.WriteLine($"Exception: {ex.Message}");
+                return false;
+            }
+            */
+            try
+            {
+                var sv = _context.sinhViens.Where(e => e.MaSinhVien == sinhVien.MaSinhVien).FirstOrDefault();
+                if (sv != null)
+                {
+                    return false;
+                }
                 // Thêm đối tượng LopHoc vào DbSet
                 _context.sinhViens.Add(sinhVien);
 
@@ -76,7 +109,6 @@ namespace BaoTest1.Services
                 Console.WriteLine($"Exception: {ex.Message}");
             }
             return false;
-            */
         }
         public bool Update(SinhVien sinhVien)
         {

@@ -1,0 +1,57 @@
+﻿@model SinhVien
+
+<h1>Sinh Viên</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MaSinhVien" class="control-label"></label>
+                <input asp-for="MaSinhVien" class="form-control" />
+                <span asp-validation-for="MaLopHoc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HoSinhVien" class="control-label"></label>
+                <input asp-for="HoSinhVien" class="form-control" />
+                <span asp-validation-for="HoSinhVien" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenSinhVien" class="control-label"></label>
+                <input asp-for="TenSinhVien" class="form-control" />
+                <span asp-validation-for="TenSinhVien" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NgaySinh" class="control-label"></label>
+                <input asp-for="NgaySinh" class="form-control"/>
+                <span asp-validation-for="NgaySinh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GioiTinh" class="control-label"></label>
+                <input asp-for="GioiTinh" class="form-control" />
+                <span asp-validation-for="GioiTinh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaLopHoc" class="control-label"></label>
+                <input asp-for="MaLopHoc" class="form-control" />
+                <span asp-validation-for="MaLopHoc" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-success mt-3">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+

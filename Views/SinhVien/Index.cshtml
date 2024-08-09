@@ -1,8 +1,38 @@
 ﻿@using BaoTest1.ViewModel
 @model SinhVienViewModel
 
-<h1>Danh sách Sinh Viên</h1>
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
 
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+<div class="mb-2">
+    <h1>Danh sách Sinh Viên</h1>
+    <a asp-controller="LopHoc" asp-action="Index" class="btn btn-success">Back</a>
+</div>
+<div class="row">
+    <form method="get" action="@Url.Action("Index", "SinhVien")">
+        <div class="mb-2">
+            <input type="text" class="form-control" name="tenSV" placeholder="Tên Sinh Viên" />
+        </div>
+        <div class="mb-2">
+            <input type="text" class="form-control" name="maSV" placeholder="Mã Sinh Viên" />
+        </div>
+        <input type="hidden" name="maLop" value="@ViewBag.MaLopHoc" />
+        <button type="submit" class="btn btn-dark">Search</button>
+    </form>
+    <div class="col-4 mt-2 mb-2">
+        <a asp-action="Create" class="btn btn-primary">Add New Sinh Viên</a>
+    </div>
+</div>
 <div>
     <table class="table table-bordered table-hover">
         <tr class="table-success">
@@ -12,6 +42,7 @@
             <th>Tên</th>
             <th>Ngày sinh</th>
             <th>Giới tính</th>
+            <th>Hoạt động</th>
         </tr>
         @if (Model.LisSV != null && Model.LisSV.Any())
         {
@@ -24,6 +55,28 @@
                     <td>@sv.TenSinhVien</td>
                     <td>@sv.NgaySinh</td>
                     <td>@sv.GioiTinh</td>
+                    <td>
+                        <a asp-action="Update" asp-route-id="@sv.Id" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#delete_@sv.Id"><i class="bi bi-trash"></i></button>
+                        <!-- Modal Delete -->
+                        <div class="modal fade" id="delete_@sv.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Bạn có chắc muốn xóa @sv.TenSinhVien không ?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
+                                        <a asp-action="Delete" asp-route-id="@sv.Id" class="btn btn-primary">Đồng Ý</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             }
         }

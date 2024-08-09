@@ -34,13 +34,15 @@ namespace BaoTest1.Models
     {
         [Key]
         public int Id {  get; set; }
+        [StringLength(50)]
         public string MaSinhVien { get; set; }
         [StringLength(50)]
         public string HoSinhVien { get; set; }
         [StringLength(50)]
         public string TenSinhVien { get; set; }
-        [StringLength(50)]
+        [DataType(DataType.Date)]
         public DateTime? NgaySinh {  get; set; }
+        
         public EGioiTinh GioiTinh {  get; set; }
         public int MaLopHoc { get; set; }
         [ForeignKey(nameof(MaLopHoc))]
