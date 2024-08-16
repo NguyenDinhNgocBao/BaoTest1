@@ -25,7 +25,7 @@ namespace BaoTest1.Services
 
         public LopHoc GetById(int id)
         {
-            return db.LopHocs.FirstOrDefault(p => p.MaLopHoc == id);
+            return db.LopHocs.Where(p => p.MaLopHoc == id).FirstOrDefault();
         }
 
 

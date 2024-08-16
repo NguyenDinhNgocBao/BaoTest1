@@ -1,0 +1,28 @@
+﻿@using BaoTest1.ViewModel
+@model LopHocViewModel
+
+<h2>Danh sách sinh viên lớp học </h2>
+<table>
+    <tr>
+        <th>STT</th>
+        <th>Mã Sinh Viên</th>
+        <th>Họ</th>
+        <th>Tên</th>
+        <th>Ngày sinh</th>
+        <th>Giới tính</th>
+    </tr>
+    @if(Model.ListSinhVien != null){
+        int index = 0;
+        foreach(var sv in Model.ListSinhVien){
+            index++;
+            <tr>
+                <td>@index</td>
+                <td>@sv.MaSinhVien</td>
+                <td>@sv.HoSinhVien</td>
+                <td>@sv.TenSinhVien</td>
+                <td>@sv.NgaySinh?.ToString("dd/MM/yyyy")</td>
+                <td>@sv.GioiTinh</td>
+            </tr>
+        }
+    }
+</table>
